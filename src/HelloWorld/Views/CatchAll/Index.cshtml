@@ -1,0 +1,38 @@
+﻿@using System.Reflection
+@using System.Diagnostics.Eventing.Reader
+@using System.Collections
+@model ResponseViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Request Data:</h1>
+<ul>
+    @foreach (var prop in Model.GetType().GetProperties())
+    {
+        @if (!new string[] { "Body", "Headers" }.Contains(prop.Name))
+        {
+            <li>@prop.Name: @prop.GetValue(Model)</li>
+        }
+        else
+        {
+            <li>
+                @prop.Name:
+                @if (!(prop.GetValue(Model) as IEnumerable<string>).Any())
+                {
+                    <span>Empty</span>
+                }
+                else
+                {
+                    <ul>
+                        @foreach (var item in prop.GetValue(Model) as IEnumerable<string>)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    }
+</ul>
+

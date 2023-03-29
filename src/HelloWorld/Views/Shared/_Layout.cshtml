@@ -1,0 +1,56 @@
+﻿@using HelloWorld.Extentions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HelloWorld</title>
+
+    @Html.InlineStyles("wwwroot/lib/bootstrap/dist/css/bootstrap.min.css")
+    @Html.InlineStyles("wwwroot/css/site.css")
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">HelloWorld</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark" href="./?query=let+me+out">Querystring Test</a>
+                        </li>
+                        <li>
+                            <form id="post-sample" action="/test/post" method="post">
+                                <input type="hidden" name="input-1" value="Get me out of here." />
+                                <input type="hidden" name="input-2" value="You must unlearn what you have learned." />
+                                <a class="nav-link text-dark" href="#" onclick="document.getElementById('post-sample').submit();">Post Test</a>
+                            </form>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark" href="/api">Test nginx location</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - HelloWorld
+        </div>
+    </footer>
+</body>
+</html>
